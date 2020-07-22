@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SDSDWorkOrder.DataAccess.Data.Repository.IRepository
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
     }
 }
