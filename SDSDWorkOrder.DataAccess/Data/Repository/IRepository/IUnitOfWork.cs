@@ -4,7 +4,9 @@ using System.Text;
 
 namespace SDSDWorkOrder.DataAccess.Data.Repository.IRepository
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork  : IDisposable
     {
+       IClientRespository Client  { get; }
+        void Save();
     }
 }
