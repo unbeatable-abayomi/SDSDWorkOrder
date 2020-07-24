@@ -1,0 +1,103 @@
+﻿@model SDSDWorkOrder.Models.Client
+@{
+    var title = "Create Client";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <form method="post" asp-action="Upsert">
+        <div class="row px-2 mx-2 backgroundWhite border">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.Id != 0)
+            {
+                <input type="hidden" asp-for="Id" />
+                title = "Edit Client";
+            }
+
+
+            <div class="col-12">
+                <h2 class="text-primary">@title</h2>
+                <br />
+            </div>
+            <div class="container">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            @*<div class="col-lg-5 d-none d-lg-block bg-register-image">
+                        </div>*@
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Add a new Client</h1>
+                                    </div>
+                                    @*<form class="user">*@
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" asp-for="Name" placeholder="Client Name">
+                                            <span asp-validation-for="Name" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control form-control-user" asp-for="Location" placeholder="Location">
+                                            <span asp-validation-for="Location" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    @*<div class="form-group">
+            <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address">
+        </div>*@
+                                    @*<div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" asp-for="CustomerUnqiueID" placeholder="Customer Id">
+                                            <span asp-validation-for="CustomerUnqiueID" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" style="border-radius: 80px">
+                                                <option selected>...Choose...</option>
+                                                <option>Project Name</option>
+                                                <option>Sales Representative</option>
+                                                <option>Resource Specialist</option>
+                                                <option>Project Office</option>
+                                                <option>Mams</option>
+                                            </select>
+                                        </div>
+                                    </div>*@
+                                    @*<div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" id="exampleInputPassword" placeholder="Location">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Unique Code">
+                                        </div>
+                                    </div>*@
+                                    @*<a href="login.html" class="btn btn-primary btn-user btn-block">
+            Submit
+        </a>*@
+
+                                    <div class="form group row">
+                                        <div class="col-8 offset-4">
+                                            @if (Model.Id != 0)
+                                            {
+                                                //Edit Button and Back to List
+                                                <partial name="_EditAndBackToListButton" model="Model.Id" />
+                                            }
+                                            else
+                                            {
+                                                //Create button and Back to List
+                                                <partial name="_CreateAndBackToListButton" model="Model.Id" />
+                                            }
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    @*</form>*@
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+</form>
+
+
+

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SDSDWorkOrder.DataAccess.Data.Repository
 {
-    class UnitOfWork : IUnitOfWork
+   public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _db;
 
