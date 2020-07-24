@@ -15,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using SDSDWorkOrder.DataAccess.Data;
 using SDSDWorkOrder.DataAccess.Data.Repository.IRepository;
 using SDSDWorkOrder.DataAccess.Data.Repository;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using SDSDWorkOrder.Utility;
 
 namespace SDSDWorkOrder
 {
@@ -35,7 +37,7 @@ namespace SDSDWorkOrder
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
-
+            services.AddSingleton<IEmailSender, EmailSender>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
             services.AddRazorPages();

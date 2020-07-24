@@ -28,7 +28,7 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository
         {
             var objFromDb = _db.Client.FirstOrDefault(s => s.Id == client.Id);
             objFromDb.Name = client.Name;
-            objFromDb.CustomerUnqiueID = client.CustomerUnqiueID;
+            objFromDb.Location = client.Location;
             _db.SaveChanges();
         }
     }

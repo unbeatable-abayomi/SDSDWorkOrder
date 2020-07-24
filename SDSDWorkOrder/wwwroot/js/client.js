@@ -21,7 +21,7 @@ function loadDataTable() {
                 "render": function (data) {
                     return `
                           <div class="text-center">
-                              <a href="/Admin/Client/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer; width: 100px;">
+                              <a href="/Admin/Client/Upsert/${data}" class="btn btn-primary text-white" style="cursor:pointer; width: 100px;">
                                      <i class="far fa-edit"></i>Edit
                                 </a>
                                                 &nbsp;
@@ -38,4 +38,37 @@ function loadDataTable() {
         },
         "width": "100%"
     });
+}
+
+function Delete(url) {
+    swal({
+        title: "Are You Sure You want to Delete?",
+        text: "You will not be able to restore the content!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        closeOnconfirm: true
+
+    }, function () {
+        $.ajax({
+            type: 'DELETE',
+            url: url,
+            success: function (data) {
+                if (data.success) {
+
+                    ShowMessage(data.message);
+                    dataTable.ajax.reload();
+                } else {
+                    toastr.error(data.message);
+                }
+            }
+        });
+    });
+
+
+}
+
+function ShowMessage(msg) {
+    toastr.success(msg);
 }
