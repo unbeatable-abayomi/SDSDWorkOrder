@@ -24,7 +24,35 @@ namespace SDSDWorkOrder.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult UserRegistration()
+        {
+            return View();
+        }
+        public IActionResult Roles()
+        {
+            return View();
+        }
+        public IActionResult Product()
+        {
+            return View();
+        }
+        public IActionResult Comments()
+        {
+            return View();
+        }
+        public IActionResult Tables()
+        {
+            return View();
+        }
+        public IActionResult WorkOrder()
+        {
+            return View();
+        }
+        public IActionResult ClientTable()
+        {
+            return View();
+        }
+        public IActionResult Login()
         {
             return View();
         }
