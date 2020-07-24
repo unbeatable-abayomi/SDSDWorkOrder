@@ -57,15 +57,18 @@ html {
   position: relative;
   min-height: 100%;
 }
-
+#accordionSidebar {
+    background-color: green !important;
+}
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
+  background-color: darkblue;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 10px; /* Vertically center the text there */
 }
