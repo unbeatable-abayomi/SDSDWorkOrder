@@ -1,0 +1,103 @@
+﻿@model IEnumerable<ApplicationUser>
+@{
+    ViewData["Title"] = "AllUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Registered Users</h6>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4"><a class="sidebar-brand d-flex align-items-center justify-content-center">
+    <img src="~/img/logo.jpg" class="w-50" />
+</a></div>
+                <div class="col-md-4 text-right">
+                    <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info">
+                        <i class="fas fa-plus"> Add User</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model.Any())
+                        {
+                        <div>@{ var i = 1;}</div>
+
+                            @foreach (var user in Model)
+                            {
+                    <tr>
+                        <td>@i</td>
+                        <td>@Html.DisplayFor(modelItem => user.FullName)</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => user.Email)
+                        </td>
+                        <td>
+                            @*<a asp-action="EditUser" asp-controller="Roles" asp-route-id="@user.Id" class="btn btn-primary" title="Edit">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </a> &nbsp;*@
+                            <a asp-action="DeleteUser" asp-controller="Roles" asp-route-Id="@user.Id" class="btn btn-danger" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i> </a>@*&nbsp;*@
+                            <span>
+                                @if (user.LockoutEnd == null || user.LockoutEnd > DateTime.Now)
+                                {
+                                    <a class="btn btn-success text-white" title="lock" asp-action="LockUser" asp-route-id="@user.Id" asp-controller="Roles"><i class="fas fa-lock-open"></i></a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-danger text-white" title="Unlock" asp-action="UnLockUser" asp-route-id="@user.Id" asp-controller="Roles"><i class="fas fa-lock"></i></a>
+                                }
+                            </span>
+
+                        </td>
+
+
+                    </tr>
+                                i++;
+                            }
+
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        $("#dataTable").DataTable();
+    })
+    </script>
+}
+<!-- /.container-fluid -->
+<!-- End of Main Content -->

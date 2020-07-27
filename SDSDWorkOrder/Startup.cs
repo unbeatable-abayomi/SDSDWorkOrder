@@ -13,10 +13,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SDSDWorkOrder.DataAccess.Data;
-using SDSDWorkOrder.DataAccess.Data.Repository.IRepository;
-using SDSDWorkOrder.DataAccess.Data.Repository;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using SDSDWorkOrder.Utility;
+using SDSDWorkOrder.Models;
+using SDSDWorkOrder.DataAccess.Data.Repository;
+using SDSDWorkOrder.DataAccess.Data.Repository.IRepository;
+using SDSDWorkOrder.Models.ViewModels;
 
 namespace SDSDWorkOrder
 {
@@ -35,11 +36,33 @@ namespace SDSDWorkOrder
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
-            services.AddSingleton<IEmailSender, EmailSender>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
+            services.AddDefaultIdentity<ApplicationUser>(
+                options => {
+
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredLength = 4;
+                    options.Password.RequiredUniqueChars = 0;
+                }).AddRoles<IdentityRole>()                
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IEmailSender, EmailSender>(i =>
+                new EmailSender(
+                    Configuration["EmailSender:Host"],
+                    Configuration.GetValue<int>("EmailSender:Port"),
+                    Configuration.GetValue<bool>("EmailSender:EnableSSL"),
+                    Configuration["EmailSender:UserName"],
+                    Configuration["EmailSender:Password"]
+                )
+            );
+
+
+
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
         }
 
