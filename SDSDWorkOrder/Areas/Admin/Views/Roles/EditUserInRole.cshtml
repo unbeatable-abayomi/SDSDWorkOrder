@@ -1,0 +1,129 @@
+﻿@model List<SDSDWorkOrder.Models.ViewModels.EditUserInRole>
+
+@{
+    ViewData["Title"] = "EditUserInRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var roleId = ViewBag.roleId;
+
+}
+
+
+
+@if (Model.Any())
+{
+    <form id="account" method="post">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <!-- DataTales Example -->
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="card shadow col-md-8 mb-4">
+                    <div class="card-header py-3">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info">
+                                    <i class="fas fa-plus"> AddUser</i>
+                                </a>
+                            </h6>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    @for (int i = 0; i < Model.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="form-check m-1">
+                                                    <label class="form-check-label" asp-for="@Model[i].IsSelected">
+                                                        @Model[i].UserName
+                                                    </label>
+                                                    <span class="pl-4">
+                                                        <input type="hidden" asp-for="@Model[i].UserId" />
+                                                        <input type="hidden" asp-for="@Model[i].UserName" />
+                                                        <input asp-for="@Model[i].IsSelected" class="form-check-input" />
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+                            <div class="card-footer">
+                                <input type="submit" class="btn btn-primary" value="update" />
+                                <a asp-action="EditRole" asp-route-id="@roleId" class="btn btn-primary">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+        </div>
+        
+    </form>
+}
+
+
+else
+{
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info">
+                        <i class="fas fa-plus"> Add User</i>
+                    </a>
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th></th>
+
+                                <th></th>
+
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>No User has been added</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -54,7 +54,9 @@
                                 <a class="nav-link dropdown-toggle-split text-black-50" href="#" id="navbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropDown">
-                                    <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="Login">Roles</a>
+
+                                    <a class="collapse-item" asp-area="Admin" asp-controller="Roles" asp-action="AllUser">Users</a>
+                                    <a class="collapse-item" asp-area="Admin" asp-controller="Roles" asp-action="AllRole">Roles</a>
 
                                     <a class="collapse-item" asp-area="Admin" asp-controller="Client" asp-action="Index">Clients</a>
 
@@ -64,8 +66,8 @@
 
                         </ul>
 
-                        <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="UserRegistration">Register</a>
-                        <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="Login">Login</a>
+
+                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Login">Login</a>
                         <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="ClientTable">Client Form</a>
                         <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="WorkOrder">Work Form</a>
                         <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="Roles">Roles</a>
