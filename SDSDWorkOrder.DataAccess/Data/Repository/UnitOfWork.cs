@@ -1,4 +1,5 @@
 ﻿using SDSDWorkOrder.DataAccess.Data.Repository.IRepository;
+using SDSDWorkOrder.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,10 +14,13 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository
         {
             _db = db;
             Client = new ClientRepository(_db);
+            Product = new ProductRepository(_db);
         }
         public IClientRespository Client { get; private set; }
+        public IProductRepository Product { get; private set; }
 
-    public void Dispose()
+
+        public void Dispose()
         {
             _db.Dispose();
         }
