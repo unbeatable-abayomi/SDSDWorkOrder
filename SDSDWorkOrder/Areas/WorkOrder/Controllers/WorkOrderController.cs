@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SDSDWorkOrder.DataAccess.Data.Repository.IRepository;
 using SDSDWorkOrder.Models;
+using SDSDWorkOrder.Models.ViewModels;
 
 namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
 {
@@ -36,11 +37,36 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddWorkOrder(WorkOrders workOrder)
+        public IActionResult AddWorkOrder(WorkOrderViewModel vm)
         {
+
+
+
+            var workorders = new WorkOrders
+            {
+                ClientId = vm.WorkOrders.ClientId,
+                ProductId = vm.WorkOrders.ProductId,
+                AccountManager = vm.WorkOrders.AccountManager,
+                Details = vm.WorkOrders.Details,
+                Description = vm.WorkOrders.Description,
+                AnnualFDHAllowance = vm.WorkOrders.AnnualFDHAllowance,
+                AnnualFDHBalance = vm.WorkOrders.AnnualFDHBalance,
+                EstimatedDeliveryDate = vm.WorkOrders.EstimatedDeliveryDate,
+                ExpectedDeliveryTime = vm.WorkOrders.ExpectedDeliveryTime,
+                Country = vm.WorkOrders.Country,
+                TimeChargeable = vm.WorkOrders.TimeChargeable
+
+            };
+
+
+
+
             if (ModelState.IsValid)
             {
-                _unitOfWork.WorkOrder.Add(workOrder);
+                _unitOfWork.WorkOrders.Add(workorders);
+                _unitOfWork.Save();
+                return RedirectToAction(nameof(Index));
+             
             }
             return View();
         }

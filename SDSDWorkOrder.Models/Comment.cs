@@ -15,10 +15,10 @@ namespace SDSDWorkOrder.Models
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }
 
-        [Display(Name = "Signed On Date")]
+        [Display(Name = "Date Of Comment")]
         [DataType(DataType.DateTime)]
-
-        public DateTime CreatedDate
+        [DisplayFormat(DataFormatString = "{0:dd,MM,yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime CreatedCommentDate
         {
             get
             {

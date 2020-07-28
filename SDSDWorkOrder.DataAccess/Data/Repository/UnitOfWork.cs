@@ -15,11 +15,11 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository
             _db = db;
             Client = new ClientRepository(_db);
             Product = new ProductRepository(_db);
-            WorkOrder = new WorkOrderRepository(_db);
+            WorkOrders = new WorkOrderRepository(_db);
         }
         public IClientRespository Client { get; private set; }
         public IProductRepository Product { get; private set; }
-        public IWorkOrder WorkOrder { get; private set; }
+        public IWorkOrder WorkOrders { get; private set; }
 
 
         public void Dispose()

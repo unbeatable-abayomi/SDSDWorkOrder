@@ -1,4 +1,4 @@
-﻿@model SDSDWorkOrder.Models.WorkOrders
+﻿@model SDSDWorkOrder.Models.ViewModels.WorkOrderViewModel
 @{
     ViewData["Title"] = "AddWorkOrder";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,98 +20,97 @@
                             <h1 class="h4 text-gray-900 mb-4">create a new work order</h1>
                             <h3 class="mb-4">@ViewBag.RandomNumber</h3>
                         </div>
-                        <form class="user">
+                        <form method="post" asp-action="AddWorkOrder">
                             <div class="form-group row">
 
                                 <div class="col-sm-6">
-                                  
-                                    <select asp-for="ClientId" class="form-control" asp-items="ViewBag.Clients">
+
+                                    <select asp-for="@Model.WorkOrders.ClientId" class="form-control" asp-items="ViewBag.Clients">
                                         <option selected>...Choose Client...</option>
                                     </select>
-                                    <span asp-validation-for="ClientId"></span>
+                                    <span asp-validation-for="@Model.WorkOrders.ClientId" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <select asp-for="Country" class="form-control" asp-items="Html.GetEnumSelectList<Country>()">
+                                    <select asp-for="@Model.WorkOrders.Country" class="form-control" asp-items="Html.GetEnumSelectList<Country>()">
                                         <option selected>...Select Location...</option>
                                     </select>
 
 
-                                    <span asp-validation-for="Country"></span>
+                                    <span asp-validation-for="@Model.WorkOrders.Country"  class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                 <input type="text" asp-for="Details" class="form-control" placeholder=" Work Order Title ">
-                                    <span asp-validation-for="Details"></span>
+                                    <input type="text" asp-for="@Model.WorkOrders.Details" class="form-control" placeholder=" Work Order Title ">
+                                    <span asp-validation-for="@Model.WorkOrders.Details"  class="text-danger"></span>
                                 </div>
                                 <div class="col-sm-6  mb-3 mb-sm-0">
 
-                                    
-                                        <select asp-for="ProductId" class="form-control" asp-items="ViewBag.Products">
-                                            <option selected>...Choose Product...</option>
-                                        </select>
-                                        <span asp-validation-for="ProductId"></span>
-                                    
+
+                                    <select asp-for="@Model.WorkOrders.ProductId" class="form-control" asp-items="ViewBag.Products">
+                                        <option selected>...Choose Product...</option>
+                                    </select>
+                                    <span asp-validation-for="@Model.WorkOrders.ProductId"  class="text-danger"></span>
+
                                 </div>
                                 <div class="col-sm-12 mt-3 mb-sm-0">
-                                 <textarea type="text" asp-for="Description" class="form-control " placeholder="Work Order Description"></textarea>
-                                    <span asp-validation-for="Description"></span>
+                                    <textarea type="text" asp-for="@Model.WorkOrders.Description" class="form-control " placeholder="Work Order Description"></textarea>
+                                    <span asp-validation-for="@Model.WorkOrders.Description"  class="text-danger"></span>
                                 </div>
 
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label asp-for="AnnualFDHAllowance"></label>
-                                    <input type="text" asp-for="AnnualFDHAllowance" class="form-control" placeholder="e.g 100/hrs">
+                                    <label asp-for="@Model.WorkOrders.AnnualFDHAllowance"></label>
+                                    <input type="text" asp-for="@Model.WorkOrders.AnnualFDHAllowance" class="form-control" placeholder="e.g 100/hrs">
 
-                                    <span asp-validation-for="AnnualFDHAllowance"></span>
+                                    <span asp-validation-for="@Model.WorkOrders.AnnualFDHAllowance"  class="text-danger"></span>
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label asp-for="AnnualFDHBalance"></label>
-                                    <input type="text" asp-for="AnnualFDHBalance" class="form-control" placeholder="e.g 100/hrs">
+                                    <label asp-for="@Model.WorkOrders.AnnualFDHBalance"></label>
+                                    <input type="text" asp-for="@Model.WorkOrders.AnnualFDHBalance" class="form-control" placeholder="e.g 100/hrs">
 
-                                    <span asp-validation-for="AnnualFDHBalance"></span>
+                                    <span asp-validation-for="@Model.WorkOrders.AnnualFDHBalance"  class="text-danger"></span>
                                 </div>
-                                
+
                             </div>
-                          
+
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label asp-for="CreatedDate"></label>
-                                    <input asp-for="CreatedDate" type="date" class="form-control">
+                                    <label asp-for="@Model.WorkOrders.CreatedDate"></label>
+                                    <input asp-for="@Model.WorkOrders.CreatedDate" type="date" class="form-control">
 
-                                    <span asp-validation-for="CreatedDate"></span>
+                                    <span asp-validation-for="@Model.WorkOrders.CreatedDate"  class="text-danger"></span>
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label asp-for="EstimatedDeliveryDate"></label>
-                                    <input asp-for="EstimatedDeliveryDate" type="date" class="form-control">
+                                    <label asp-for="@Model.WorkOrders.EstimatedDeliveryDate"></label>
+                                    <input asp-for="@Model.WorkOrders.EstimatedDeliveryDate" type="date" class="form-control">
 
-                                    <span asp-validation-for="EstimatedDeliveryDate"></span>
+                                    <span asp-validation-for="@Model.WorkOrders.EstimatedDeliveryDate"  class="text-danger"></span>
                                 </div>
 
-                             
+
                             </div>
-          
+
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label asp-for="TimeChargeable"></label>
-                                    <input asp-for="TimeChargeable" type="text" placeholder="e.g 100/hrs" class="form-control">
+                                    <label asp-for="@Model.WorkOrders.TimeChargeable"></label>
+                                    <input asp-for="@Model.WorkOrders.TimeChargeable" type="text" placeholder="e.g 100/hrs" class="form-control">
 
-                                    <span asp-validation-for="TimeChargeable"></span>
+                                    <span asp-validation-for="@Model.WorkOrders.TimeChargeable"  class="text-danger"></span>
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label asp-for="AccountManager"></label>
-                                    <select asp-for="AccountManager" class="form-control" asp-items="Html.GetEnumSelectList<AccountManager>()">
+                                    <label asp-for="@Model.WorkOrders.AccountManager"></label>
+                                    <select asp-for="@Model.WorkOrders.AccountManager" class="form-control" asp-items="Html.GetEnumSelectList<AccountManager>()">
                                         <option selected>...Choose Account Manager...</option>
                                     </select>
-                                    <span asp-validation-for="AccountManager"></span>
+                                    <span asp-validation-for="@Model.WorkOrders.AccountManager" class="text-danger"></span>
                                 </div>
 
                             </div>
-                        
-                            <input type="submit" class="btn btn-primary btn-user btn-block" value="submit" />
 
+                            <input type="submit" class="btn btn-primary btn-user btn-block" value="Create" />
 
 
                             <hr>

@@ -18,7 +18,7 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository
 
         public IEnumerable<SelectListItem> GetWorkLOrderistForDropDown()
         {
-            return _db.WorkOrder.Select(i => new SelectListItem()
+            return _db.WorkOrders.Select(i => new SelectListItem()
             {
                 Text = i.Details,
                 Value = i.Id.ToString()
@@ -27,7 +27,7 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository
 
         public void Update(WorkOrders workOrder)
         {
-            var objFromDb = _db.WorkOrder.FirstOrDefault(s => s.Id == workOrder.Id);
+            var objFromDb = _db.WorkOrders.FirstOrDefault(s => s.Id == workOrder.Id);
             objFromDb.Details = workOrder.Details;
             objFromDb.Description = workOrder.Description;
 
