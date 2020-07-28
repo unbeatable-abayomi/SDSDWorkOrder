@@ -8,6 +8,7 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository.IRepository
     {
        IClientRespository Client  { get; }
         IProductRepository Product { get; }
+        IWorkOrder WorkOrder { get; }
         void Save();
     }
 }

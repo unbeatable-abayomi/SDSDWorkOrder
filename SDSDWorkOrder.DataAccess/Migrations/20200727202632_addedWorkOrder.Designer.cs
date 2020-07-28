@@ -10,8 +10,8 @@ using SDSDWorkOrder.DataAccess.Data;
 namespace SDSDWorkOrder.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200727123621_Totalmergin")]
-    partial class Totalmergin
+    [Migration("20200727202632_addedWorkOrder")]
+    partial class addedWorkOrder
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -260,6 +260,57 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                     b.ToTable("Product");
                 });
 
+            modelBuilder.Entity("SDSDWorkOrder.Models.WorkOrders", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AccountManager")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AnnualFDHAllowance")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AnnualFDHBalance")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EstimatedDeliveryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ExpectedDeliveryTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TimeChargeable")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("WorkOrder");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -307,6 +358,21 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                     b.HasOne("SDSDWorkOrder.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SDSDWorkOrder.Models.WorkOrders", b =>
+                {
+                    b.HasOne("SDSDWorkOrder.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SDSDWorkOrder.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

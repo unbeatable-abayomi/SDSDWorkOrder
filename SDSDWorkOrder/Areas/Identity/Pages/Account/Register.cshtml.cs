@@ -74,8 +74,8 @@ namespace SDSDWorkOrder.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-            [ForeignKey("IdentityRole")]
-            public string IdentityRoleId { get; set; }
+            //[ForeignKey("IdentityRole")]
+            //public string IdentityRoleId { get; set; }
             //public string IdentityRoleId { get; set; }
         }
 

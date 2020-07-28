@@ -32,7 +32,7 @@ namespace SDSDWorkOrder.Models
 
         private DateTime? dateCreated = null;
         public int WorkOrderId { get; set; }
-        public WorkOrder WorkOrder { get; set; }
+        public WorkOrders WorkOrder { get; set; }
        
     }
 }

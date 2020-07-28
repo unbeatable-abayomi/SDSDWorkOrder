@@ -14,15 +14,11 @@ namespace SDSDWorkOrder.Models
         [Display(Name ="Client's Name")]
         public string Name { get; set; }
 
-        [Required]
+       
         [Display(Name = "Location")]
         public string Location { get; set; }
-        //[Display(Name = "Annual FDH Allowance")]
-        //public int? FDHAllowance { get; set; }
-
-        //[Display(Name = "Avaliable FDH Balance")]
-        //public int? FDHBalance { get; set; }
-        //[Display(Name = "SDSD Unqiue Customer ID ")]
-        //public string CustomerUnqiueID { get; set; }
+      
+        [Display(Name = "Client ID ")]
+        public string CustomerUnqiueID { get; set; }
     }
 }

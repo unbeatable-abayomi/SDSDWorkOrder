@@ -13,7 +13,8 @@ function loadDataTable() {
         },
 
         "columns": [
-            { "data": "name", "width": "50%" },
+            { "data": "name", "width": "30%" },
+            { "data": "customerUnqiueId", "width": "20%" },
             { "data": "location", "width": "20%" },
             {
 
