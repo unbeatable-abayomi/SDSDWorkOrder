@@ -3,6 +3,7 @@ using SDSDWorkOrder.DataAccess.Data.Repository.IRepository;
 using SDSDWorkOrder.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 
@@ -25,6 +26,11 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository
             });
         }
 
+
+        //public IEnumerable<WorkOrders> GetWorkOrdersTo()
+        //{
+        //    return _db.WorkOrders.Include(x => x.Client);
+        //}
         public void Update(WorkOrders workOrder)
         {
             var objFromDb = _db.WorkOrders.FirstOrDefault(s => s.Id == workOrder.Id);

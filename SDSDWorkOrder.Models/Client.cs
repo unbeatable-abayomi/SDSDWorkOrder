@@ -19,6 +19,6 @@ namespace SDSDWorkOrder.Models
         public string Location { get; set; }
       
         [Display(Name = "Client ID ")]
-        public string CustomerUnqiueID { get; set; }
+        public string CustomerId { get; set; }
     }
 }

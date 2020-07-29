@@ -13,7 +13,7 @@ namespace SDSDWorkOrder.Models
        
         [Required]
         
-        [Display(Name = "Title")]
+        [Display(Name = "Task")]
         public string Details { get; set; }
         
         [Required]

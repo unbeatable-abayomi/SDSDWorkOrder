@@ -24,12 +24,13 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository
             });
         }
 
+    
         public void Update(Client client)
         {
             var objFromDb = _db.Client.FirstOrDefault(s => s.Id == client.Id);
             objFromDb.Name = client.Name;
             objFromDb.Location = client.Location;
-            objFromDb.CustomerUnqiueID = client.CustomerUnqiueID;
+            objFromDb.CustomerId = client.CustomerId;
             _db.SaveChanges();
         }
     }

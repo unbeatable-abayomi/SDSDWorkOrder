@@ -1,6 +1,4 @@
-﻿
-
-var dataTable;
+﻿var dataTable;
 
 $(document).ready(function () {
     loadDataTable();
@@ -9,31 +7,33 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": {
-            "url": "/admin/client/GetAll",
+            "url": "/workorder/workorder/GetAll",
             "type": "GET",
             "datatype": "json"
         },
 
         "columns": [
-            { "data": "name", "width": "30%" },
-            { "data": "customerId", "width": "20%" },
-       
+            { "data": "details", "width": "20%" },
+            { "data": "description", "width": "30%" },
+            { "data": "clientId", "width": "20%" },
+            { "data": "country", "width": "20%" },
+            { "data": "client.name", "width": "20%" },
             {
-
+        
                 "data": "id",
                 "render": function (data) {
                     return `
                           <div class="text-center">
-                              <a href="/Admin/Client/Upsert/${data}" class="btn btn-primary text-white" style="cursor:pointer; width: 100px;">
+                              <a href="/workorder/workorder/addworkorder/${data}" class="btn btn-primary text-white" style="cursor:pointer; width: 100px;">
                                      <i class="far fa-edit"></i>
                                 </a>
                                                 &nbsp;
-  <a onclick=Delete("/Admin/Client/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer; width: 100px;">
+  <a onclick=Delete("/workorder/workorder/delete/${data}") class="btn btn-danger text-white" style="cursor:pointer; width: 100px;">
                                      <i class="far fa-trash-alt"></i>
                                 </a>
                            </div>
                            `;
-                }, "width": "30%"
+                }, "width": "10%"
             }
         ],
         "language": {
