@@ -1,0 +1,53 @@
+﻿@model SDSDWorkOrder.Models.WorkOrders
+
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>WorkOrders</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+    </dl>
+    <div class="form-group row">
+
+        <div class="col-sm-6 mb-3 mb-sm-0" asp-for="">
+
+            @foreach (var item in Model.Comments)
+            {<hr />
+                <div>
+                    <p><b>Comment</b></p>
+                    <p>@item.Text</p>
+                   
+                    <p>date @item.CreatedDate</p>
+                </div>
+            }
+            @{ await Html.RenderPartialAsync("_Comment", new SDSDWorkOrder.Models.ViewModels.CommentViewModel { WorkOrderId = Model.Id, CommentId = 0 });
+            }
+            ;
+        </div>
+        <div class="col-sm-6 mb-3 mb-sm-0">
+
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

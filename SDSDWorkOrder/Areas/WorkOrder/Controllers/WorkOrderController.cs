@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SDSDWorkOrder.DataAccess.Data;
 using SDSDWorkOrder.DataAccess.Data.Repository.IRepository;
 using SDSDWorkOrder.Models;
 using SDSDWorkOrder.Models.ViewModels;
@@ -13,23 +15,18 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
     public class WorkOrderController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-       
-        public WorkOrderController(IUnitOfWork unitOfWork)
+        private readonly ApplicationDbContext _context;
+
+        public WorkOrderController(IUnitOfWork unitOfWork, ApplicationDbContext context)
         {
             _unitOfWork = unitOfWork;
-        
-        } 
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
-
-
-
-
-
-   
-
 
         public IActionResult AddWorkOrder(int? id)
         {
@@ -81,29 +78,67 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
             }
             return View(workorders);
         }
+        public IActionResult AllWorkOrder ()
+        {
+            var result = _context.WorkOrders.Include(x => x.Comments).ToList();
+            return View(result);
+        }
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Upsert(Client client)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (client.Id == 0)
-        //        {
-        //            _unitOfWork.Client.Add(client);
-        //        }
-        //        else
-        //        {
-        //            _unitOfWork.Client.Update(client);
-        //        }
-        //        _unitOfWork.Save();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(client);
-        //}
+       
 
-        #region API CALLS
+        public IActionResult Comment(CommentViewModel Vmodel)
+        {
+
+
+            //var result = _unitOfWork.WorkOrders.Details(Vmodel.WorkOrderId);
+            var result = _context.WorkOrders.Include(p => p.Comments).FirstOrDefault(x => x.Id == Vmodel.WorkOrderId);
+           
+
+
+            if (ModelState.IsValid)
+            {
+
+                result.Comments.Add(new Comment
+                {
+                    Id = Vmodel.CommentId,
+                    Text = Vmodel.Text,
+                    CreatedDate = DateTime.Now,
+                    User = "Ifeanyi"
+                }) ;
+
+                _unitOfWork.WorkOrders.Update(result);
+
+            }
+            _unitOfWork.Save();
+
+            return RedirectToAction("WorkOrder");
+        }
+
+
+        #region
+
+            //[HttpPost]
+            //[ValidateAntiForgeryToken]
+            //public IActionResult Upsert(Client client)
+            //{
+            //    if (ModelState.IsValid)
+            //    {
+            //        if (client.Id == 0)
+            //        {
+            //            _unitOfWork.Client.Add(client);
+            //        }
+            //        else
+            //        {
+            //            _unitOfWork.Client.Update(client);
+            //        }
+            //        _unitOfWork.Save();
+            //        return RedirectToAction(nameof(Index));
+            //    }
+            //    return View(client);
+            //}
+            #endregion Upser
+            #region API CALLS
 
         [HttpGet]
         public IActionResult GetAll()

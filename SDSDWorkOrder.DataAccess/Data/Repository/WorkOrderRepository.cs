@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SDSDWorkOrder.DataAccess.Data.Repository.IRepository;
 using SDSDWorkOrder.Models;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SDSDWorkOrder.DataAccess.Data.Repository
 {
@@ -17,6 +19,7 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository
             _db = db;
         }
 
+
         public IEnumerable<SelectListItem> GetWorkLOrderistForDropDown()
         {
             return _db.WorkOrders.Select(i => new SelectListItem()
@@ -26,6 +29,13 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository
             });
         }
 
+        public WorkOrders Details (int? id)
+        {
+            var result = _db.WorkOrders.Include(x => x.Comments)
+                .FirstOrDefault(m => m.Id == id);
+
+            return result;
+        }
 
         //public IEnumerable<WorkOrders> GetWorkOrdersTo()
         //{

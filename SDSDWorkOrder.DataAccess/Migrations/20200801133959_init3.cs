@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SDSDWorkOrder.DataAccess.Migrations
 {
-    public partial class first : Migration
+    public partial class init3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,7 +54,8 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
-                    Location = table.Column<string>(nullable: false)
+                    Location = table.Column<string>(nullable: true),
+                    CustomerId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -180,6 +181,42 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "WorkOrders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Details = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    ClientId = table.Column<int>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false),
+                    AnnualFDHAllowance = table.Column<string>(nullable: true),
+                    AnnualFDHBalance = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    EstimatedDeliveryDate = table.Column<DateTime>(nullable: false),
+                    ExpectedDeliveryTime = table.Column<string>(nullable: true),
+                    TimeChargeable = table.Column<string>(nullable: true),
+                    Country = table.Column<int>(nullable: false),
+                    AccountManager = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkOrders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkOrders_Client_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Client",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_WorkOrders_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -218,6 +255,16 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrders_ClientId",
+                table: "WorkOrders",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkOrders_ProductId",
+                table: "WorkOrders",
+                column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -238,16 +285,19 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Client");
-
-            migrationBuilder.DropTable(
-                name: "Product");
+                name: "WorkOrders");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Client");
+
+            migrationBuilder.DropTable(
+                name: "Product");
         }
     }
 }

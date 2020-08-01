@@ -24,14 +24,18 @@ function loadDataTable() {
                 "render": function (data) {
                     return `
                           <div class="text-center">
-                              <a href="/workorder/workorder/addworkorder/${data}" class="btn btn-primary text-white" style="cursor:pointer; width: 100px;">
+                              <a href="/workorder/workorder/addworkorder/${data}" class="btn btn-primary text-white" style="cursor:pointer; width: 50px;">
                                      <i class="far fa-edit"></i>
                                 </a>
                                                 &nbsp;
-  <a onclick=Delete("/workorder/workorder/delete/${data}") class="btn btn-danger text-white" style="cursor:pointer; width: 100px;">
+  <a onclick=Delete("/workorder/workorder/delete/${data}") class="btn btn-danger text-white" style="cursor:pointer; width: 50px;">
                                      <i class="far fa-trash-alt"></i>
                                 </a>
-                           </div>
+                               &nbsp;
+  <div class="text-center">
+                              <a href="/workorder/workorder/details/${data}" class="btn btn-primary text-white" style="cursor:pointer; width: 50px;">
+                                     <i class="fas fa-binoculars"></i>
+                                </a>
                            `;
                 }, "width": "10%"
             }
