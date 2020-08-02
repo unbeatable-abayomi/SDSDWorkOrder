@@ -51,7 +51,23 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
             return View(workOrders);
         }
 
-    
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var work = await _context.WorkOrders.Include(x => x.Comments)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (work == null)
+            {
+                return NotFound();
+            }
+
+            return View(work);
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -112,7 +128,7 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
             }
             _unitOfWork.Save();
 
-            return RedirectToAction("WorkOrder");
+            return RedirectToAction(nameof(Index));
         }
 
 
