@@ -17,7 +17,6 @@ function loadDataTable() {
             { "data": "description", "width": "30%" },
             { "data": "product.name", "width": "20%" },
             { "data": "client.name", "width": "20%" },
-            { "data": "country", "width": "20%" },
             {
         
                 "data": "id",
@@ -37,7 +36,7 @@ function loadDataTable() {
                                      <i class="fas fa-binoculars"></i>
                                 </a>
                            `;
-                }, "width": "10%"
+                }, "width": "20%"
             }
         ],
         "language": {
