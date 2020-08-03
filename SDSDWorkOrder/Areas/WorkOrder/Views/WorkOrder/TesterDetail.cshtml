@@ -1,0 +1,63 @@
+﻿@model SDSDWorkOrder.Models.WorkOrders
+@{
+    var title = "TestDetals";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <table class="table table-bordered table-responsive">
+        <tr>
+            <th colspan="2">Order Request Form(Drop list to select the work order type MAMS or IHM)</th>
+            <td colspan="2"><img src="#" alt="sdsd image is placed here" /></td>
+        </tr>
+        <tr>
+            <th>Client/User Information Name:</th>
+            <td>Drop list of active client</td>
+            <th>Available FDH Allowance:</th>
+            <td>Constant based on clients contract</td>
+        </tr>
+        <tr>
+            <th>Location:</th>
+            <td>Drop list of countries</td>
+            <th>Available FDH Balance:</th>
+            <td>selected in hours</td>
+        </tr>
+
+        @* another section of the form *@
+        <tr class="bg-light">
+            <th>Task/Project(In details)</th>
+            <th>Request Order(Please describe your request in details)</th>
+            <th>Estimated time by the account manager</th>
+            <th>Estimated project time chargeable(Y/N)</th>
+        </tr>
+        <tr>
+            <td>Task Project details will appear here</td>
+            <td>Request order details will appear here</td>
+            <td>Account manager entered time in hours appears here</td>
+            <td>Drop list of yes/no selected appears here</td>
+        </tr>
+        @* This is the table for sdsd use *@
+        <tr>
+            <th colspan="4" class="text-center">For SDSD use only</th>
+        </tr>
+        <tr>
+            <th>User comment:</th>
+            <td colspan="3">This is where user comment appears</td>
+        </tr>
+        <tr>
+            <th>Account Manager Approval:</th>
+            <td colspan="3">This is where account manager comment/approval appears</td>
+        </tr>
+        <tr>
+            <th>Project office comment/approval:</th>
+            <td colspan="3">This is where project manager comment appears</td>
+        </tr>
+        <tr>
+            <th>Management comment approval:</th>
+            <td colspan="3">This is where management comment approval appears</td>
+        </tr>
+    </table>
+
+
+
+</div>
+

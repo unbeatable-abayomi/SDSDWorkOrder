@@ -10,8 +10,8 @@ using SDSDWorkOrder.DataAccess.Data;
 namespace SDSDWorkOrder.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200727202632_addedWorkOrder")]
-    partial class addedWorkOrder
+    [Migration("20200801160438_details")]
+    partial class details
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -231,8 +231,10 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -242,6 +244,33 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Client");
+                });
+
+            modelBuilder.Entity("SDSDWorkOrder.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("User")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WorkOrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WorkOrderId");
+
+                    b.ToTable("Comment");
                 });
 
             modelBuilder.Entity("SDSDWorkOrder.Models.Product", b =>
@@ -279,6 +308,12 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Country")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -308,7 +343,7 @@ namespace SDSDWorkOrder.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("WorkOrder");
+                    b.ToTable("WorkOrders");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -358,6 +393,15 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                     b.HasOne("SDSDWorkOrder.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SDSDWorkOrder.Models.Comment", b =>
+                {
+                    b.HasOne("SDSDWorkOrder.Models.WorkOrders", "WorkOrder")
+                        .WithMany("Comments")
+                        .HasForeignKey("WorkOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -244,6 +244,33 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                     b.ToTable("Client");
                 });
 
+            modelBuilder.Entity("SDSDWorkOrder.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("User")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WorkOrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WorkOrderId");
+
+                    b.ToTable("Comment");
+                });
+
             modelBuilder.Entity("SDSDWorkOrder.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -277,6 +304,9 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CommentId")
                         .HasColumnType("int");
 
                     b.Property<int>("Country")
@@ -361,6 +391,15 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                     b.HasOne("SDSDWorkOrder.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SDSDWorkOrder.Models.Comment", b =>
+                {
+                    b.HasOne("SDSDWorkOrder.Models.WorkOrders", "WorkOrder")
+                        .WithMany("Comments")
+                        .HasForeignKey("WorkOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
