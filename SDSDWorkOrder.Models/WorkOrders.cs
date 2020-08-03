@@ -83,7 +83,9 @@ namespace SDSDWorkOrder.Models
 
         [Display(Name = "Account Manager")]
         public AccountManager AccountManager { get; set; }
-        //public IEnumerable<Comment> Comments { get; set; }
+
+        public int CommentId { get; set; }
+        public List <Comment> Comments { get; set; }
         //[Required]
         //[Display(Name = "Created By")]
 

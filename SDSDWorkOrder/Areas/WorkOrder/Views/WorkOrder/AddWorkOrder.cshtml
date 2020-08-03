@@ -53,8 +53,8 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" asp-for="@Model.Details" class="form-control" placeholder=" Work Order Title ">
-                                    <span asp-validation-for="@Model.Details"  class="text-danger"></span>
+                                    <input id="txtHint" type="text" asp-for="@Model.Details" class="form-control" placeholder=" Work Order Title ">
+                                    <span asp-validation-for="@Model.Details" class="text-danger"></span>
                                 </div>
                                 <div class="col-sm-6  mb-3 mb-sm-0">
 
@@ -62,12 +62,12 @@
                                     <select asp-for="@Model.ProductId" class="form-control" asp-items="ViewBag.Products">
                                         <option selected>...Choose Product...</option>
                                     </select>
-                                    <span asp-validation-for="@Model.ProductId"  class="text-danger"></span>
+                                    <span asp-validation-for="@Model.ProductId" class="text-danger"></span>
 
                                 </div>
                                 <div class="col-sm-12 mt-3 mb-sm-0">
                                     <textarea type="text" asp-for="@Model.Description" class="form-control " placeholder="Work Order Description"></textarea>
-                                    <span asp-validation-for="@Model.Description"  class="text-danger"></span>
+                                    <span asp-validation-for="@Model.Description" class="text-danger"></span>
                                 </div>
 
                             </div>
@@ -76,13 +76,13 @@
                                     <label asp-for="@Model.AnnualFDHAllowance"></label>
                                     <input type="text" asp-for="@Model.AnnualFDHAllowance" class="form-control" placeholder="e.g 100/hrs">
 
-                                    <span asp-validation-for="@Model.AnnualFDHAllowance"  class="text-danger"></span>
+                                    <span asp-validation-for="@Model.AnnualFDHAllowance" class="text-danger"></span>
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label asp-for="@Model.AnnualFDHBalance"></label>
                                     <input type="text" asp-for="@Model.AnnualFDHBalance" class="form-control" placeholder="e.g 100/hrs">
 
-                                    <span asp-validation-for="@Model.AnnualFDHBalance"  class="text-danger"></span>
+                                    <span asp-validation-for="@Model.AnnualFDHBalance" class="text-danger"></span>
                                 </div>
 
                             </div>
@@ -92,13 +92,13 @@
                                     <label asp-for="@Model.CreatedDate"></label>
                                     <input asp-for="@Model.CreatedDate" type="date" class="form-control">
 
-                                    <span asp-validation-for="@Model.CreatedDate"  class="text-danger"></span>
+                                    <span asp-validation-for="@Model.CreatedDate" class="text-danger"></span>
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label asp-for="@Model.EstimatedDeliveryDate"></label>
                                     <input asp-for="@Model.EstimatedDeliveryDate" type="date" class="form-control">
 
-                                    <span asp-validation-for="@Model.EstimatedDeliveryDate"  class="text-danger"></span>
+                                    <span asp-validation-for="@Model.EstimatedDeliveryDate" class="text-danger"></span>
                                 </div>
 
 
@@ -109,7 +109,7 @@
                                     <label asp-for="@Model.TimeChargeable"></label>
                                     <input asp-for="@Model.TimeChargeable" type="text" placeholder="e.g 100/hrs" class="form-control">
 
-                                    <span asp-validation-for="@Model.TimeChargeable"  class="text-danger"></span>
+                                    <span asp-validation-for="@Model.TimeChargeable" class="text-danger"></span>
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label asp-for="@Model.AccountManager"></label>
@@ -122,20 +122,25 @@
                             </div>
 
                             @*<input type="submit" class="btn btn-primary btn-user btn-block" value="Create" />*@
-                              <div class="form group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            @if (Model.Id != 0)
-                                            {
-                                                //Edit Button and Back to List
-                                                <partial name="_EditAndBackToListButton" model="Model.Id" />
-                                            }
-                                            else
-                                            {
-                                                //Create button and Back to List
-                                                <partial name="_CreateAndBackToListButton" model="Model.Id" />
-                                            }
-                                        </div>
+                            <div class="form group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+
+
                                     </div>
+                                    &ensp;
+                                    @if (Model.Id != 0)
+                                    {
+                                        //Edit Button and Back to List
+                                        <partial name="_EditAndBackToListButton" model="Model.Id" />
+                                    }
+                                    else
+                                    {
+                                        //Create button and Back to List
+                                        <partial name="_CreateAndBackToListButton" model="Model.Id" />
+                                    }
+                                </div>
+                            </div>
 
                             <hr>
                         </form>
@@ -147,3 +152,5 @@
     </div>
 
 </div>
+
+

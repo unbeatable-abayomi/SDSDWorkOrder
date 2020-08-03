@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SDSDWorkOrder.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SDSDWorkOrder.DataAccess.Data.Repository.IRepository
 {
@@ -10,6 +12,8 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository.IRepository
     {
         IEnumerable<SelectListItem> GetWorkLOrderistForDropDown();
         void Update(WorkOrders workOrder);
-      
+        WorkOrders Details(int? id);
+
+
     }
 }
