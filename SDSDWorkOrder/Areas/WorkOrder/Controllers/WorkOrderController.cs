@@ -58,7 +58,7 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
                 return NotFound();
             }
 
-            var work = await _context.WorkOrders.Include(x => x.Comments)
+            var work = await _context.WorkOrders.Include(x => x.Comments).Include(x => x.Product).Include(x => x.Client)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (work == null)
             {

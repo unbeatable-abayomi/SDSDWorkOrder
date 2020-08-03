@@ -69,7 +69,7 @@
 
                         <a class="collapse-item" asp-area="Identity" asp-page="/Account/Login">Login</a>
                         <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="ClientTable">Client Form</a>
-                        <a class="collapse-item" asp-area="WorkOrder" asp-controller="WorkOrder" asp-action="AddWorkOrder">Work Form</a>
+                        <a class="collapse-item" asp-area="WorkOrder" asp-controller="WorkOrder" asp-action="index">Work Form</a>
                         @*<a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="WorkOrder">Work Form</a>*@
                         <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="Roles">Roles</a>
                         <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="Product">Products</a>
@@ -113,14 +113,14 @@
 
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary searchappend" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
+                       @*<div class="input-group">
+                          <input type="text" class="form-control bg-light border-0 small" aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary searchappend" type="button">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
+</div>
+                        </div>*@
                     </form>
                 </nav>
                 <!-- End of Topbar -->

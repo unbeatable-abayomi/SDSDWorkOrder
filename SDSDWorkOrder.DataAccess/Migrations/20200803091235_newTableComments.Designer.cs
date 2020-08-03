@@ -10,8 +10,8 @@ using SDSDWorkOrder.DataAccess.Data;
 namespace SDSDWorkOrder.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200801160438_details")]
-    partial class details
+    [Migration("20200803091235_newTableComments")]
+    partial class newTableComments
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -14,6 +14,8 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository.IRepository
         void Update(WorkOrders workOrder);
         WorkOrders Details(int? id);
 
+        
+
 
     }
 }

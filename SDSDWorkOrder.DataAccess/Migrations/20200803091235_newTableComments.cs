@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SDSDWorkOrder.DataAccess.Migrations
 {
-    public partial class init3 : Migration
+    public partial class newTableComments : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -198,7 +198,8 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                     ExpectedDeliveryTime = table.Column<string>(nullable: true),
                     TimeChargeable = table.Column<string>(nullable: true),
                     Country = table.Column<int>(nullable: false),
-                    AccountManager = table.Column<int>(nullable: false)
+                    AccountManager = table.Column<int>(nullable: false),
+                    CommentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -213,6 +214,28 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                         name: "FK_WorkOrders_Product_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Product",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comment",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Text = table.Column<string>(nullable: false),
+                    User = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    WorkOrderId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comment_WorkOrders_WorkOrderId",
+                        column: x => x.WorkOrderId,
+                        principalTable: "WorkOrders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -257,6 +280,11 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comment_WorkOrderId",
+                table: "Comment",
+                column: "WorkOrderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_WorkOrders_ClientId",
                 table: "WorkOrders",
                 column: "ClientId");
@@ -285,13 +313,16 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "WorkOrders");
+                name: "Comment");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "WorkOrders");
 
             migrationBuilder.DropTable(
                 name: "Client");
