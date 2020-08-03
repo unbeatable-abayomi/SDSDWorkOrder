@@ -84,6 +84,10 @@ namespace SDSDWorkOrder.Models
         [Display(Name = "Account Manager")]
         public AccountManager AccountManager { get; set; }
 
+        public int AccountOfficersId { get; set; }
+        public AccountOfficer AccountOfficer { get; set; }
+
+
         public int CommentId { get; set; }
         public List <Comment> Comments { get; set; }
         //[Required]

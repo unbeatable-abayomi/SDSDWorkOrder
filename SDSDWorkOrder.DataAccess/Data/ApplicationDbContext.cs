@@ -18,6 +18,6 @@ namespace SDSDWorkOrder.DataAccess.Data
         public DbSet<WorkOrders> WorkOrders { get; set; }
         public DbSet<Comment> Comment  { get; set; }
 
-        //public DbSet<UserRole> UserRole { get; set; }
+        public DbSet<AccountOfficer> AccountOfficers { get; set; }
     }
 }

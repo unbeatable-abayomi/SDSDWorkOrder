@@ -118,7 +118,13 @@
                                     </select>
                                     <span asp-validation-for="@Model.AccountManager" class="text-danger"></span>
                                 </div>
-
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label asp-for="@Model.AccountOfficersId"></label>
+                                    <select asp-for="@Model.AccountOfficersId" class="form-control" asp-items=" ViewBag.AccountOfficer">
+                                        <option selected>...Choose Account Officer...</option>
+                                    </select>
+                                    <span asp-validation-for="@Model.AccountOfficersId" class="text-danger"></span>
+                                </div>
                             </div>
 
                             @*<input type="submit" class="btn btn-primary btn-user btn-block" value="Create" />*@

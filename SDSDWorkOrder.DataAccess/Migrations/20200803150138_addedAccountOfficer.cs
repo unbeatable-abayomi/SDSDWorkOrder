@@ -3,10 +3,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SDSDWorkOrder.DataAccess.Migrations
 {
-    public partial class newTableComments : Migration
+    public partial class addedAccountOfficer : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AccountOfficers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccountOfficers", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -199,11 +212,19 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                     TimeChargeable = table.Column<string>(nullable: true),
                     Country = table.Column<int>(nullable: false),
                     AccountManager = table.Column<int>(nullable: false),
+                    AccountOfficersId = table.Column<int>(nullable: false),
+                    AccountOfficerId = table.Column<int>(nullable: true),
                     CommentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WorkOrders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkOrders_AccountOfficers_AccountOfficerId",
+                        column: x => x.AccountOfficerId,
+                        principalTable: "AccountOfficers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_WorkOrders_Client_ClientId",
                         column: x => x.ClientId,
@@ -285,6 +306,11 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                 column: "WorkOrderId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_WorkOrders_AccountOfficerId",
+                table: "WorkOrders",
+                column: "AccountOfficerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_WorkOrders_ClientId",
                 table: "WorkOrders",
                 column: "ClientId");
@@ -323,6 +349,9 @@ namespace SDSDWorkOrder.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "WorkOrders");
+
+            migrationBuilder.DropTable(
+                name: "AccountOfficers");
 
             migrationBuilder.DropTable(
                 name: "Client");

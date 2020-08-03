@@ -35,7 +35,7 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
        
             ViewBag.Clients = _unitOfWork.Client.GetClientListForDropDown();
             ViewBag.Products = _unitOfWork.Product.GetProductListForDropDown();
-
+            ViewBag.AccountOfficer = _unitOfWork.AccountOfficers.GetProductListForAccountOfficer();
             WorkOrders workOrders = new WorkOrders();
 
             if (id == null)
@@ -58,7 +58,7 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
                 return NotFound();
             }
 
-            var work = await _context.WorkOrders.Include(x => x.Comments).Include(x => x.Product).Include(x => x.Client)
+            var work = await _context.WorkOrders.Include(x => x.Comments).Include(x => x.Product).Include(x => x.Client).Include(x => x.AccountOfficer)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (work == null)
             {
@@ -76,6 +76,7 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
 
             ViewBag.Clients = _unitOfWork.Client.GetClientListForDropDown();
             ViewBag.Products = _unitOfWork.Product.GetProductListForDropDown();
+            ViewBag.AccountOfficer = _unitOfWork.AccountOfficers.GetProductListForAccountOfficer();
 
             if (ModelState.IsValid)
             {

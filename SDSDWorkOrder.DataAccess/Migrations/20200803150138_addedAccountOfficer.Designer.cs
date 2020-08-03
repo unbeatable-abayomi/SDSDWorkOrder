@@ -10,8 +10,8 @@ using SDSDWorkOrder.DataAccess.Data;
 namespace SDSDWorkOrder.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200803091235_newTableComments")]
-    partial class newTableComments
+    [Migration("20200803150138_addedAccountOfficer")]
+    partial class addedAccountOfficer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -154,6 +154,23 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("SDSDWorkOrder.Models.AccountOfficer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AccountOfficers");
                 });
 
             modelBuilder.Entity("SDSDWorkOrder.Models.ApplicationUser", b =>
@@ -299,6 +316,12 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                     b.Property<int>("AccountManager")
                         .HasColumnType("int");
 
+                    b.Property<int?>("AccountOfficerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AccountOfficersId")
+                        .HasColumnType("int");
+
                     b.Property<string>("AnnualFDHAllowance")
                         .HasColumnType("nvarchar(max)");
 
@@ -338,6 +361,8 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountOfficerId");
 
                     b.HasIndex("ClientId");
 
@@ -408,6 +433,10 @@ namespace SDSDWorkOrder.DataAccess.Migrations
 
             modelBuilder.Entity("SDSDWorkOrder.Models.WorkOrders", b =>
                 {
+                    b.HasOne("SDSDWorkOrder.Models.AccountOfficer", "AccountOfficer")
+                        .WithMany()
+                        .HasForeignKey("AccountOfficerId");
+
                     b.HasOne("SDSDWorkOrder.Models.Client", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId")
