@@ -30,6 +30,7 @@ namespace SDSDWorkOrder.Areas.Admin.Controllers
             }
 
             client = _unitOfWork.Client.Get(id.GetValueOrDefault());
+            //or client = _unitOfWork.Client.Get((int)id);
             if (client == null)
             {
                 return NotFound();

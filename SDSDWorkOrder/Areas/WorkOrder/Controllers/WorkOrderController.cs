@@ -109,7 +109,7 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
         public IActionResult GetAll()
         {
             //return Json(new { data = _unitOfWork.WorkOrders.GetWorkOrdersTo() });
-            return Json(new { data = _unitOfWork.WorkOrders.GetAll(includeProperties: "Client,Product") });
+            return Json(new { data = _unitOfWork.WorkOrders.GetAll(includeProperties:"Product,Client") });
         }
 
         [HttpDelete]

@@ -15,9 +15,9 @@ function loadDataTable() {
         "columns": [
             { "data": "details", "width": "20%" },
             { "data": "description", "width": "30%" },
-            { "data": "clientId", "width": "20%" },
-            { "data": "country", "width": "20%" },
+            { "data": "product.name", "width": "20%" },
             { "data": "client.name", "width": "20%" },
+            { "data": "country", "width": "20%" },
             {
         
                 "data": "id",
