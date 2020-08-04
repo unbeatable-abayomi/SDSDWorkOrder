@@ -16,11 +16,13 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository
             Client = new ClientRepository(_db);
             Product = new ProductRepository(_db);
             WorkOrders = new WorkOrderRepository(_db);
+            NumberSequence = new NumberSequence(_db);
             AccountOfficers = new AccountOfficerRepository(_db);
         }
         public IClientRespository Client { get; private set; }
         public IProductRepository Product { get; private set; }
         public IWorkOrder WorkOrders { get; private set; }
+        public INumberSequence NumberSequence { get; private set; }
         public IAccountOfficer AccountOfficers { get; private set; }
 
 
