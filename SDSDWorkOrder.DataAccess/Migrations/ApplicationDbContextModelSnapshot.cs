@@ -288,6 +288,30 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                     b.ToTable("Comment");
                 });
 
+            modelBuilder.Entity("SDSDWorkOrder.Models.NumberSequenceModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("LastNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Module")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NumberSequenceName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Prefix")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NumberSequences");
+                });
+
             modelBuilder.Entity("SDSDWorkOrder.Models.Product", b =>
                 {
                     b.Property<int>("Id")
