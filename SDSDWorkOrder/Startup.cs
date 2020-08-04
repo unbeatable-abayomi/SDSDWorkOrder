@@ -18,6 +18,8 @@ using SDSDWorkOrder.Models;
 using SDSDWorkOrder.DataAccess.Data.Repository;
 using SDSDWorkOrder.DataAccess.Data.Repository.IRepository;
 using SDSDWorkOrder.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SDSDWorkOrder
 {
@@ -59,6 +61,14 @@ namespace SDSDWorkOrder
                     Configuration["EmailSender:Password"]
                 )
             );
+            services.AddTransient<SignInManager<ApplicationUser>>();
+            services.AddMvc(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+
+            }).AddXmlDataContractSerializerFormatters();
+
 
 
 

@@ -10,8 +10,8 @@ using SDSDWorkOrder.DataAccess.Data;
 namespace SDSDWorkOrder.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200803150138_addedAccountOfficer")]
-    partial class addedAccountOfficer
+    [Migration("20200804081312_WorkOrderRefNumber2")]
+    partial class WorkOrderRefNumber2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -288,6 +288,30 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                     b.HasIndex("WorkOrderId");
 
                     b.ToTable("Comment");
+                });
+
+            modelBuilder.Entity("SDSDWorkOrder.Models.NumberSequenceModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("LastNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Module")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NumberSequenceName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Prefix")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NumberSequences");
                 });
 
             modelBuilder.Entity("SDSDWorkOrder.Models.Product", b =>

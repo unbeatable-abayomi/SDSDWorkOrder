@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SDSDWorkOrder.DataAccess.Migrations
 {
-    public partial class addedAccountOfficer : Migration
+    public partial class WorkOrderRefNumber2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -73,6 +73,22 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Client", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NumberSequences",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NumberSequenceName = table.Column<string>(nullable: true),
+                    Module = table.Column<string>(nullable: true),
+                    Prefix = table.Column<string>(nullable: true),
+                    LastNumber = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NumberSequences", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -340,6 +356,9 @@ namespace SDSDWorkOrder.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Comment");
+
+            migrationBuilder.DropTable(
+                name: "NumberSequences");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

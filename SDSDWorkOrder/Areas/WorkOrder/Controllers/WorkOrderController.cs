@@ -30,8 +30,8 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
 
         public IActionResult AddWorkOrder(int? id)
         {
-            RandomNumber _randomNumber = new RandomNumber();
-            ViewBag.RandomNumber ="#"+_randomNumber.GetRandomNumb();
+           
+            ViewBag.RandomNumber = _unitOfWork.NumberSequence.GetNumberSequence("WD");
        
             ViewBag.Clients = _unitOfWork.Client.GetClientListForDropDown();
             ViewBag.Products = _unitOfWork.Product.GetProductListForDropDown();
