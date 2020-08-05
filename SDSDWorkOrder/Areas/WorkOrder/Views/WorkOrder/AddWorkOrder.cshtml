@@ -111,13 +111,7 @@
 
                                     <span asp-validation-for="@Model.TimeChargeable" class="text-danger"></span>
                                 </div>
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label asp-for="@Model.AccountManager"></label>
-                                    <select asp-for="@Model.AccountManager" class="form-control" asp-items="Html.GetEnumSelectList<AccountManager>()">
-                                        <option selected>...Choose Account Manager...</option>
-                                    </select>
-                                    <span asp-validation-for="@Model.AccountManager" class="text-danger"></span>
-                                </div>
+                                
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label asp-for="@Model.AccountOfficersId"></label>
                                     <select asp-for="@Model.AccountOfficersId" class="form-control" asp-items=" ViewBag.AccountOfficer">

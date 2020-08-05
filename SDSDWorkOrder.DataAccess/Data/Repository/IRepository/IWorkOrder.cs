@@ -13,6 +13,7 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository.IRepository
         IEnumerable<SelectListItem> GetWorkLOrderistForDropDown();
         void Update(WorkOrders workOrder);
         WorkOrders Details(int? id);
+        
 
         
 

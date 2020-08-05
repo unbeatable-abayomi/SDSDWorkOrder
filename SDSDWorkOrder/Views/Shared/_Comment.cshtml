@@ -1,7 +1,8 @@
-﻿@model SDSDWorkOrder.Models.ViewModels.CommentViewModel
-@*@using Microsoft.AspNetCore.Identity
+﻿@model SDSDWorkOrder.Models.ViewModels.WorkorderCommentVM
+@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager*@
+@inject UserManager<IdentityUser> UserManager
+
 
 
 
@@ -12,22 +13,55 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
 
-                <input asp-for="WorkOrderId" class="form-control" type="hidden" />
+                <input asp-for="WorkOrders.Id" class="form-control" type="hidden" />
 
             </div>
             <div class="form-group">
 
-                @*<input asp-for="User" class="form-control" type="hidden" value="@ViewBag.user" />
-                @if (SignInManager.IsSignedIn(User))
+
+                @if (SignInManager.IsSignedIn(User) && User.IsInRole("ProjectManager") && Model.WorkOrders.PMstatus == 0)
                 {
-                    <input asp-for="User" type="hidden" value="@User.Identity.Name" />
-                }*@
+                    <p><a asp-action="UpdateStatus" asp-area="Admin" asp-controller="WorkOrder" class="btn btn-danger">Approve</a></p>
+                    <div class="form-group row">
+                        @*<label asp-for="Text" class="control-label"></label>*@
+                        <textarea asp-for="Comment.Text" class="form-control col-12"></textarea>
+                        <span asp-validation-for="Comment.Text" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
+                }
+
+                @if (SignInManager.IsSignedIn(User) && User.IsInRole("AccountOfficer") && Model.WorkOrders.PMstatus == 1)
+                {
+                    <p><a asp-action="UpdateStatus" asp-area="Admin" asp-controller="WorkOrder" class="btn btn-danger">Approve</a></p>
+                    <div class="form-group row">
+                        @*<label asp-for="Text" class="control-label"></label>*@
+                        <textarea asp-for="Comment.Text" class="form-control col-12"></textarea>
+                        <span asp-validation-for="Comment.Text" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
+                }
+                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Management") && Model.WorkOrders.AMstatus == 0)
+                {
+                    <p><a asp-action="UpdateStatus" asp-area="Admin" asp-controller="WorkOrder" class="btn btn-danger">Approve</a></p>
+                    <div class="form-group row">
+                        @*<label asp-for="Text" class="control-label"></label>*@
+                        <textarea asp-for="Comment.Text" class="form-control col-12"></textarea>
+                        <span asp-validation-for="Comment.Text" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
+                }
 
             </div>
             <div class="form-group row">
                 @*<label asp-for="Text" class="control-label"></label>*@
-                <textarea asp-for="Text" class="form-control col-12"></textarea>
-                <span asp-validation-for="Text" class="text-danger"></span>
+                <textarea asp-for="Comment.Text" class="form-control col-12"></textarea>
+                <span asp-validation-for="Comment.Text" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Submit" class="btn btn-primary" />
