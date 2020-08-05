@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SDSDWorkOrder.DataAccess.Data;
 
 namespace SDSDWorkOrder.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200804110449_newseedDATA")]
+    partial class newseedDATA
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -361,23 +363,6 @@ namespace SDSDWorkOrder.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Product");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "MAMS"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "V-Platfrom"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "IHM"
-                        });
                 });
 
             modelBuilder.Entity("SDSDWorkOrder.Models.WorkOrders", b =>

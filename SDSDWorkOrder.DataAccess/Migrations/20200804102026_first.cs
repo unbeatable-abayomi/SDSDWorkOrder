@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SDSDWorkOrder.DataAccess.Migrations
 {
-    public partial class WorkOrderRefNumber2 : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

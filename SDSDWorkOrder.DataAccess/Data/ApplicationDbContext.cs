@@ -21,5 +21,16 @@ namespace SDSDWorkOrder.DataAccess.Data
 
 
         public DbSet<AccountOfficer> AccountOfficers { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+         
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Seed();
+        }
+
+
     }
 }

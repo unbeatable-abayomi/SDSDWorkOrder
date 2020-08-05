@@ -62,12 +62,13 @@ namespace SDSDWorkOrder
                 )
             );
             services.AddTransient<SignInManager<ApplicationUser>>();
-            services.AddMvc(options =>
-            {
-                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
+            services.AddMvc();
+            //services.AddMvc(options =>
+            //{
+            //    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            //    options.Filters.Add(new AuthorizeFilter(policy));
 
-            }).AddXmlDataContractSerializerFormatters();
+            /* }).AddXmlDataContractSerializerFormatters();*/
 
 
 

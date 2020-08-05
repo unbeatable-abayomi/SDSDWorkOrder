@@ -10,8 +10,8 @@ using SDSDWorkOrder.DataAccess.Data;
 namespace SDSDWorkOrder.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200804081312_WorkOrderRefNumber2")]
-    partial class WorkOrderRefNumber2
+    [Migration("20200804102026_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
