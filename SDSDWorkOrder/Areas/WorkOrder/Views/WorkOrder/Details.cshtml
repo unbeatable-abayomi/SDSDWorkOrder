@@ -134,20 +134,20 @@
 
             @foreach (var item in Model.Comments)
             {<hr />
-             <div>
-                 <p><b>Comments</b></p>
-                 <p>@item.Text</p>
-                 @if (signInManager.IsSignedIn(User) @*&& User.IsInRole("SuperAdmin")*@)
-                 {
-                     <p>@User.Identity.Name</p>
-                     
-                 }
+                <div>
+                    <p><b>Comments</b></p>
+                    <p>@item.Text</p>
 
-                     <p>date @item.CreatedDate</p>
-             </div>
+
+                    <p>@User.Identity.Name</p>
+
+
+
+                    <p>date @item.CreatedDate</p>
+                </div>
             }
             <div class="col-12">
-                @{ await Html.RenderPartialAsync("_Comment", new SDSDWorkOrder.Models.ViewModels.CommentViewModel { WorkOrderId = Model.Id, CommentId = 0 });
+                @{ await Html.RenderPartialAsync("_Comment", new SDSDWorkOrder.Models.ViewModels.WorkorderCommentVM { WorkOrderId = Model.Id, CommentId = 0 });
                 }
                 ;
             </div>
