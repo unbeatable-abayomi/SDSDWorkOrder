@@ -145,12 +145,17 @@
 
                     <p>date @item.CreatedDate</p>
                 </div>
+
+                
             }
-            <div class="col-12">
-                @{ await Html.RenderPartialAsync("_Comment", new SDSDWorkOrder.Models.ViewModels.WorkorderCommentVM { WorkOrderId = Model.Id, CommentId = 0 });
-                }
-                ;
-            </div>
+            @if (Model.Comments.Count == 0)
+            {
+        <div class="col-12">
+            @{ await Html.RenderPartialAsync("_Comment", new SDSDWorkOrder.Models.ViewModels.CommentViewModel { WorkOrderId = Model.Id, CommentId = 0 });
+            }
+            ;
+        </div>
+            }
         </div>
         <div class="col-sm-6 mb-3 mb-sm-0">
 

@@ -107,7 +107,7 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
 
        
 
-        public IActionResult Comment(WorkorderCommentVM Vmodel)
+        public IActionResult Comment(CommentViewModel Vmodel)
         {
 
 
@@ -122,7 +122,7 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
                 result.Comments.Add(new Comment
                 {
                     Id = Vmodel.CommentId,
-                    Text = Vmodel.Comment.Text,
+                    Text = Vmodel.Text,
                     CreatedDate = DateTime.Now,
                     User = "Ifeanyi"
                 }) ;
