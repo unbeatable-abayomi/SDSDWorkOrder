@@ -113,9 +113,9 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
 
             //var result = _unitOfWork.WorkOrders.Details(Vmodel.WorkOrderId);
             var result = _context.WorkOrders.Include(p => p.Comments).FirstOrDefault(x => x.Id == Vmodel.WorkOrderId);
-           
 
 
+      
             if (ModelState.IsValid)
             {
 
@@ -124,7 +124,11 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
                     Id = Vmodel.CommentId,
                     Text = Vmodel.Text,
                     CreatedDate = DateTime.Now,
-                    User = "Ifeanyi"
+                    User = Vmodel.User,
+                    PMApproval = Vmodel.PMApproval,
+                    ACApproval = Vmodel.ACApproval,
+                    MGApproval = Vmodel.MGApproval,
+                    Count      = Vmodel.Count
                 }) ;
 
                 _unitOfWork.WorkOrders.Update(result);

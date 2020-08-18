@@ -60,10 +60,6 @@
         </div>
     </div>*@
 
-<div>
-    @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |*@
-    @*<a asp-action="Index">Back to List</a>*@
-</div>
 <div class="container">
     <table class="table table-bordered table-responsive">
         <tr>
@@ -97,27 +93,95 @@
             <th>Estimated project time chargeable(Y/N)</th>
             <td>Drop list of yes/no selected appears here</td>
         </tr>
+        <tr>
+            <th colspan="4" class="text-center">Approval Details</th>
+        </tr>
+        @foreach (var item in Model.Comments)
+        {
+            var index1 = Model.Comments.Where(x => x.Id == 1);
+            var index2 = Model.Comments.Where(x => x.Id == 2);
+            @if (item.Id == 1)
+            {
+                <tr>
+                    <th colspan="4" class="text-center"></th>
+                </tr>
 
+                <tr>
+                    <th>Approval Status:</th>
+                    <td colspan="3"><p>Approved</p></td>
+                </tr>
 
-        <tr>
-            <th colspan="4" class="text-center">For SDSD use only</th>
-        </tr>
-        <tr>
-            <th>User comment:</th>
-            <td colspan="3">This is where user comment appears</td>
-        </tr>
-        <tr>
-            <th>Account Manager Approval:</th>
-            <td colspan="3">This is where account manager comment/approval appears</td>
-        </tr>
-        <tr>
-            <th>Project office comment/approval:</th>
-            <td colspan="3">This is where project manager comment appears</td>
-        </tr>
-        <tr>
-            <th>Management comment approval:</th>
-            <td colspan="3">This is where management comment approval appears</td>
-        </tr>
+                <tr>
+                    <th>Account officer:</th>
+                    <td colspan="3"><p>@item.User</p></td>
+                </tr>
+                <tr>
+                    <th>User comment:</th>
+                    <td colspan="3"><p>@item.Text</p></td>
+                </tr>
+                <tr>
+                    <th>Date:</th>
+                    <td colspan="3">
+                        <p>date @item.CreatedDate</p>
+                    </td>
+                </tr>
+            }
+            @if (item.Id == 2 )
+                
+            {
+                <tr>
+                    <th colspan="4" class="text-center"></th>
+                </tr>
+
+                <tr>
+                    <th>Approval Status:</th>
+                    <td colspan="3"><p>Approved</p></td>
+                </tr>
+
+                <tr>
+                    <th>Project Manager:</th>
+                    <td colspan="3"><p>@item.User</p></td>
+                </tr>
+                <tr>
+                    <th>User comment:</th>
+                    <td colspan="3"><p>@item.Text</p></td>
+                </tr>
+                <tr>
+                    <th>Date:</th>
+                    <td colspan="3">
+                        <p>date @item.CreatedDate</p>
+                    </td>
+                </tr>
+            }
+            @if (item.Id == 3)
+            {
+                <tr>
+                    <th colspan="4" class="text-center"></th>
+                </tr>
+
+                <tr>
+                    <th>Approval Status:</th>
+                    <td colspan="3"><p>Approved</p></td>
+                </tr>
+
+                <tr>
+                    <th>Project Manager:</th>
+                    <td colspan="3"><p>@item.User</p></td>
+                </tr>
+                <tr>
+                    <th>User comment:</th>
+                    <td colspan="3"><p>@item.Text</p></td>
+                </tr>
+                <tr>
+                    <th>Date:</th>
+                    <td colspan="3">
+                        <p>date @item.CreatedDate</p>
+                    </td>
+                </tr>
+            }
+
+        }
+
     </table>
 
 
@@ -134,28 +198,70 @@
 
             @foreach (var item in Model.Comments)
             {<hr />
-                <div>
-                    <p><b>Comments</b></p>
-                    <p>@item.Text</p>
+             <div>
+                 <p><b>Comments</b></p>
+                 <p>@item.Text</p>
+                 <p>@item.Id</p>
+                 <p>@item.User</p>
 
 
-                    <p>@User.Identity.Name</p>
 
 
 
-                    <p>date @item.CreatedDate</p>
-                </div>
+                 <p>date @item.CreatedDate</p>
+             </div>
 
-                
+
             }
-            @if (Model.Comments.Count == 0)
+            @if (signInManager.IsSignedIn(User) && User.IsInRole("ProjectManager") && Model.Comments.Count == 0)
+
             {
-        <div class="col-12">
-            @{ await Html.RenderPartialAsync("_Comment", new SDSDWorkOrder.Models.ViewModels.CommentViewModel { WorkOrderId = Model.Id, CommentId = 0 });
+                @*@foreach (var item in Model.Comments)
+                {*@
+                    //if (item.PMApproval == false)
+                    //{
+                        <div class="col-12">
+                            @{ await Html.RenderPartialAsync("_Comment", new SDSDWorkOrder.Models.ViewModels.CommentViewModel { WorkOrderId = Model.Id, CommentId = 0, Count =1 });
+                            }
+                            ;
+                        </div>
+                    @*}*@
+                                //}
             }
-            ;
-        </div>
+
+            @if (signInManager.IsSignedIn(User) && User.IsInRole("AccountOfficer") && Model.Comments.Count ==1)
+
+            {
+                @foreach (var item in Model.Comments)
+                {
+                    if (item.PMApproval == true)
+                    {
+                        <div class="col-12">
+                            @{ await Html.RenderPartialAsync("_Comment", new SDSDWorkOrder.Models.ViewModels.CommentViewModel { WorkOrderId = Model.Id, CommentId = 0, Count =2 });
+                            }
+                            ;
+                        </div>
+                    }
+                }
+
             }
+            @if (signInManager.IsSignedIn(User) && User.IsInRole("Management") && Model.Comments.Count == 2)
+
+            {
+                @foreach (var item in Model.Comments)
+                {
+                    if (item.ACApproval == true)
+                    {
+                        <div class="col-12">
+                            @{ await Html.RenderPartialAsync("_Comment", new SDSDWorkOrder.Models.ViewModels.CommentViewModel { WorkOrderId = Model.Id, CommentId = 0, Count =3});
+                            }
+                            ;
+                        </div>
+                    }
+                }
+
+            }
+
         </div>
         <div class="col-sm-6 mb-3 mb-sm-0">
 

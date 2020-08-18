@@ -34,7 +34,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" >
+            <a class="sidebar-brand d-flex align-items-center justify-content-center">
                 <img src="~/img/logo.jpg" class="w-50" />
             </a>
             <!-- Divider -->
@@ -44,51 +44,59 @@
             <li class="nav-item active">
                 <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <span>Explore</span>
                 </a>
                 <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        @if (signInManager.IsSignedIn(User) @*&& User.IsInRole("SuperAdmin")*@)
+                        @if (signInManager.IsSignedIn(User)@*&& User.IsInRole("SuperAdmin")*@)
+{
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle-split text-black-50" href="#" id="navbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropDown">
+
+                                <a class="collapse-item" asp-area="Admin" asp-controller="Roles" asp-action="AllUser">Users</a>
+                                <a class="collapse-item" asp-area="Admin" asp-controller="Roles" asp-action="AllRole">Roles</a>
+
+                                <a class="collapse-item" asp-area="Admin" asp-controller="Client" asp-action="Index">Clients</a>
+
+                                <a class="collapse-item" asp-area="Admin" asp-controller="Product" asp-action="Index">Products</a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                }
+                        @if (signInManager.IsSignedIn(User))
                         {
-                            <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle-split text-black-50" href="#" id="navbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
-
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropDown">
-
-                                        <a class="collapse-item" asp-area="Admin" asp-controller="Roles" asp-action="AllUser">Users</a>
-                                        <a class="collapse-item" asp-area="Admin" asp-controller="Roles" asp-action="AllRole">Roles</a>
-
-                                        <a class="collapse-item" asp-area="Admin" asp-controller="Client" asp-action="Index">Clients</a>
-
-                                        <a class="collapse-item" asp-area="Admin" asp-controller="Product" asp-action="Index">Products</a>
-                                    </div>
-                                </li>
-
-                            </ul>
+                            <form class=" form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="collapse-item btn btn-link text-dark">Logout</button>
+                            </form>
+                            <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="ClientTable">Manage Client</a>
+                            <a class="collapse-item" asp-area="WorkOrder" asp-controller="WorkOrder" asp-action="Index">Work Order Manager</a>
 
                         }
+                        else
+                        {
 
+                            <a class="collapse-item" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        }
 
-
-
-                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Login">Login</a>
-                        <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="ClientTable">Client Form</a>
-                        <a class="collapse-item" asp-area="WorkOrder" asp-controller="WorkOrder" asp-action="Index">Work Form</a>
                         @*<a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="WorkOrder">Work Form</a>*@
-                        <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="Roles">Roles</a>
-                        <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="Product">Products</a>
-                        <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="Comments">Comments</a>
-                        <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="Tables">Tables</a>
+                        @*<a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="Roles">Roles</a>
+        <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="Product">Products</a>
+        <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="Comments">Comments</a>
+        <a class="collapse-item" asp-area="WorkOrder" asp-controller="Home" asp-action="Tables">Tables</a>*@
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span>
+                    <span>Activities</span>
                 </a>
             </li>
 
