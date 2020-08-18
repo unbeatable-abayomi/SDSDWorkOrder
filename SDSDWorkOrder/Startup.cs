@@ -62,6 +62,7 @@ namespace SDSDWorkOrder
                 )
             );
             services.AddTransient<SignInManager<ApplicationUser>>();
+            services.AddTransient<UserManager<ApplicationUser>>();
             services.AddMvc();
             //services.AddMvc(options =>
             //{

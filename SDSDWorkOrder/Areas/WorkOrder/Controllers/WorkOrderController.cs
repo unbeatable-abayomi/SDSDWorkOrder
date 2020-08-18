@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SDSDWorkOrder.DataAccess.Data;
@@ -16,11 +17,13 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ApplicationDbContext _context;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public WorkOrderController(IUnitOfWork unitOfWork, ApplicationDbContext context)
+        public WorkOrderController(IUnitOfWork unitOfWork, ApplicationDbContext context, SignInManager<ApplicationUser> signInManager )
         {
             _unitOfWork = unitOfWork;
             _context = context;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -110,9 +113,9 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
 
             //var result = _unitOfWork.WorkOrders.Details(Vmodel.WorkOrderId);
             var result = _context.WorkOrders.Include(p => p.Comments).FirstOrDefault(x => x.Id == Vmodel.WorkOrderId);
-           
 
 
+      
             if (ModelState.IsValid)
             {
 
@@ -121,7 +124,11 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
                     Id = Vmodel.CommentId,
                     Text = Vmodel.Text,
                     CreatedDate = DateTime.Now,
-                    User = "Ifeanyi"
+                    User = Vmodel.User,
+                    PMApproval = Vmodel.PMApproval,
+                    ACApproval = Vmodel.ACApproval,
+                    MGApproval = Vmodel.MGApproval,
+                    Count      = Vmodel.Count
                 }) ;
 
                 _unitOfWork.WorkOrders.Update(result);
@@ -181,6 +188,39 @@ namespace SDSDWorkOrder.Areas.WorkOrder.Controllers
             return Json(new { success = true, message = "Delete Successful" });
         }
         #endregion
+
+
+        public IActionResult UpdateStatus(int id)
+        {
+            
+            if (id != 0)
+            {
+                var workOrder = _unitOfWork.WorkOrders.Get(id);
+
+                if(_signInManager.IsSignedIn(User) && User.IsInRole("Salesmanager"))
+                {
+                    workOrder.AMstatus = 1;
+                    _unitOfWork.Save();
+                }
+
+                if (_signInManager.IsSignedIn(User) && User.IsInRole("ProjectManager"))
+                {
+                    workOrder.PMstatus = 1;
+                    _unitOfWork.Save();
+                }
+
+                if (_signInManager.IsSignedIn(User) && User.IsInRole("Management"))
+                {
+                    workOrder.MGstatus = 1;
+                    _unitOfWork.Save();
+                }
+
+            }
+            
+            return RedirectToAction();
+
+        }
+
 
     }
 }

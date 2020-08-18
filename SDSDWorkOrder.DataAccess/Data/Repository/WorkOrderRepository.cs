@@ -37,10 +37,6 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository
             return result;
         }
 
-        //public IEnumerable<WorkOrders> GetWorkOrdersTo()
-        //{
-        //    return _db.WorkOrders.Include(x => x.Client);
-        //}
         public void Update(WorkOrders workOrder)
         {
             var objFromDb = _db.WorkOrders.FirstOrDefault(s => s.Id == workOrder.Id);
@@ -50,6 +46,7 @@ namespace SDSDWorkOrder.DataAccess.Data.Repository
             _db.SaveChanges();
         }
 
-      
+        
+
     }
 }

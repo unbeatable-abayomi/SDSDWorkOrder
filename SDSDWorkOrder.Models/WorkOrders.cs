@@ -82,7 +82,7 @@ namespace SDSDWorkOrder.Models
         public Country Country { get; set; }
 
         [Display(Name = "Account Manager")]
-        public AccountManager AccountManager { get; set; }
+       
 
         public int AccountOfficersId { get; set; }
         public AccountOfficer AccountOfficer { get; set; }
@@ -90,24 +90,15 @@ namespace SDSDWorkOrder.Models
 
         public int CommentId { get; set; }
         public List <Comment> Comments { get; set; }
-        //[Required]
-        //[Display(Name = "Created By")]
 
-        //public string CreatedBy { get; set; }
+        public int AMstatus { get; set; } = 0;
+        public int PMstatus { get; set; } = 0;
+        public int MGstatus { get; set; } = 0;
 
-
-        //[Display(Name = "Resource")]
-        //public IdentityUser UserTwo { get; set; }
-
-        //[Display(Name = "Project Manager")]
-        //public IdentityUser UserThree { get; set; }
     }
 
 
-    public enum AccountManager
-    {
-        Morgens,Micheal
-    }
+    
 
  
 
